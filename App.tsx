@@ -1,21 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+
+// Aula1 - 0:09:37
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware, combineReducers} from 'redux';
+import thunk from 'redux-thunk';
+import themeReducer from './redux/themeReducer';
+
+import HomeScrren from './src/screens/HomeScreen';
+
+
+// Aula1 - 0:10:31
+const store = createStore( combineReducers({themeReducer}),
+                           applyMiddleware(thunk) ); 
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      < HomeScrren />
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
